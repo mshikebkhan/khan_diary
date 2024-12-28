@@ -1,0 +1,18 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Header -->
+<center>
+  <p class="title is-size-4 is-size-5-mobile">Followers</p>
+  <p class="subtitle is-size-5 is-size-6-mobile" id="id_followers_count">{{followers_count}}</p>
+  <hr class="page-header-hr">
+</center>
+
+<div class="columns is-centered">
+  <div class="column is-half is-wider">
+    {% include 'users/users-list.html' %}
+  </div>
+</div>
+
+{% endblock content %}

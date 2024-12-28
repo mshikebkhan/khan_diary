@@ -1,0 +1,21 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% load tz %}
+{% block content %}
+
+<!-- Page Header -->
+<center>
+  <p class="title is-size-4 is-size-5-mobile">Security checkup</p>
+  <hr class="page-header-hr">
+</center>
+
+<p class="title is-size-5 is-size-6-mobile has-text-centered">
+  Last login: {{last_login|date:'jS F Y - h:i A'}}
+</p>
+
+<p class="help-text has-text-centered">
+  Note: You have to login again after every 7 days.
+</p>
+
+
+{% endblock content %}

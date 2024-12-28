@@ -1,0 +1,141 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Header -->
+<center>
+  <p class="title is-size-4 is-size-5-mobile">Sign up</p>
+  <p class="subtitle is-size-5 is-size-6-mobile">Create your account for free.</p>
+  <hr class="page-header-hr">
+
+</center>
+
+<!-- Sign up Form -->
+<div class="columns is-centered has-text-centered">
+  <div class="column is-wider is-half-tablet">
+    <div class="card">
+      <div class="card-content">
+        <form role="form" method="post">
+          {% csrf_token %}
+
+          <!-- First name & last name -->
+          <div class="field is-horizontal">
+            <div class="field-body">
+
+              <!-- First name -->
+              <div class="field">
+                <p class="control is-expanded ">{{form.first_name}}</p>
+              </div>
+
+              <!-- Last name -->
+              <div class="field">
+                <p class="control is-expanded">{{form.last_name}}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Username -->
+          <div class="field">
+            <div class="control has-icons-left has-icons-right">
+              {{form.username}}
+              <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+            </div>
+
+            <!-- Username Errors -->
+            {% if form.username.errors %}
+              <p class="help is-danger">
+                <ul>
+                  {% for error in form.username.errors %}
+                    <li>
+                      <strong style="color: red;">{{ error|escape }}</strong>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </p>
+            {% endif %}
+
+          </div>
+
+          <!-- Email -->
+          <div class="field">
+            <div class="control has-icons-left has-icons-right">
+              {{form.email}}
+              <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
+            </div>
+
+            <!-- Email Errors -->
+            {% if form.email.errors %}
+              <p class="help is-danger">
+                <ul>
+                  {% for error in form.email.errors %}
+                    <li>
+                      <strong style="color: red;">{{ error|escape }}</strong>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </p>
+            {% endif %}
+
+          </div>
+
+          <!-- Password -->
+          <div class="field">
+            <div class="control has-icons-left has-icons-right">
+              {{form.password1}}
+              <span class="icon is-small is-left"><i class="fas fa-key"></i></span>
+            </div>
+
+            <!-- Password errors -->
+            {% if form.password1.errors %}
+              <p class="help is-danger">
+                <ul>
+                  {% for error in form.password1.errors %}
+                    <li>
+                      <strong style="color: red;">{{ error|escape }}</strong>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </p>
+            {% endif %}
+
+          </div>
+
+          <!-- Agreement -->
+          <p class="help" style="padding-bottom: 5px;">
+            By clicking Sign up button, you agree to our
+            <a href="{% url 'khandiary:privacy'  %}">Privacy</a>
+            &
+            <a href="{% url 'khandiary:terms'  %}">Terms</a>
+          </p>
+
+          <!-- Submit Button -->
+          <div class="field">
+            <div class="control">
+              <button class="button is-rounded is-success" name="action" type="submit">
+              <b>Sign up</b>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <br>
+
+    <!-- Documentation Link -->
+    <p class="subtitle is-size-6 ">
+      Read our
+      <a href="{% url 'khandiary:documentation' %}">Documentation</a>
+      before you start !
+    </p>
+
+    <!-- Log in Link -->
+    <p class="subtitle is-size-6 ">
+      Already have an account?
+      <a href="{% url 'khandiary:login' %}">Log in</a>
+    </p>
+  </div>
+</div>
+
+
+{% endblock content %}

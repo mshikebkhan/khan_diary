@@ -1,0 +1,357 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Header -->
+<div class="tabs is-centered is-boxed">
+  <ul>
+    <li class="is-active"><a>Edit profile</a></li>
+    <li><a href="{% url 'users:account' %}">Account</a></li>
+  </ul>
+</div>
+
+<!-- Settings Form -->
+<form role="form" method="post" autocomplete="off">
+  {% csrf_token %}
+
+  <!-- Name -->
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Name</label>
+    </div>
+
+    <div class="field-body">
+      <div class="field">
+        <p class="control is-expanded">
+          {{uform.first_name}}
+        </p>
+      </div>
+
+      <div class="field">
+        <p class="control is-expanded">
+          {{uform.last_name}}
+        </p>
+      </div>
+
+    </div>
+  </div>
+ 
+  <!-- Username -->
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Username</label>
+    </div>
+
+    <div class="field-body">
+      <div class="field is-expanded">
+        <p class="control is-expanded has-icons-left">
+          {{uform.username}}
+          <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+        </p>
+
+        <!-- Username Errors -->
+        {% if uform.username.errors %}
+          <p class="help is-danger">
+            <ul>
+              {% for error in uform.username.errors %}
+                <li>
+                  <strong style="color: red;">{{ error|escape }}</strong>
+                </li>
+              {% endfor %}
+            </ul>
+          </p>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Email</label>
+    </div>
+
+    <div class="field-body">
+      <div class="field is-expanded">
+        <p class="control is-expanded has-icons-left">
+          {{uform.email}}
+          <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
+        </p>
+
+        <!-- Username Errors -->
+        {% if uform.email.errors %}
+          <p class="help is-danger">
+            <ul>
+              {% for error in uform.email.errors %}
+                <li>
+                  <strong style="color: red;">{{ error|escape }}</strong>
+                </li>
+              {% endfor %}
+            </ul>
+          </p>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Gender -->
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Gender</label>
+    </div>
+
+    <div class="field-body">
+      <div class="field is-expanded">
+        <p class="select is-fullwidth is-rounded is-success">
+          {{pform.gender}}
+        </p>
+
+        <!-- Gender Errors -->
+        {% if pform.gender.errors %}
+          <p class="help is-danger">
+            <ul>
+              {% for error in pform.gender.errors %}
+                <li>
+                  <strong style="color: red;">{{ error|escape }}</strong>
+                </li>
+              {% endfor %}
+            </ul>
+          </p>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Birthday -->
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Birthday</label>
+    </div>
+
+    <div class="field-body">
+      <div class="field is-expanded">
+        <p class="control is-expanded has-icons-left">
+          {{pform.birthday}}
+          <span class="icon is-small is-left"><i class="fas fa-birthday-cake"></i></span>
+        </p> 
+
+        <!-- Birthday Errors -->
+        {% if pform.birthday.errors %}
+          <p class="help is-danger">
+            <ul>
+              {% for error in pform.birthday.errors %}
+                <li>
+                  <strong style="color: red;">{{ error|escape }}</strong>
+                </li>
+              {% endfor %}
+            </ul>
+          </p>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Bio -->
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Bio</label>
+    </div>
+
+    <div class="field-body">
+      <div class="field is-expanded">
+        <p class="control">
+          {{pform.bio}}
+        </p>
+
+        <!-- Bio Errors -->
+        {% if pform.bio.errors %}
+          <p class="help is-danger">
+            <ul>
+              {% for error in pform.bio.errors %}
+                <li>
+                  <strong style="color: red;">{{ error|escape }}</strong>
+                </li>
+              {% endfor %}
+            </ul>
+          </p>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Country -->
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Country</label>
+    </div>
+
+    <div class="field-body">
+      <div class="field is-expanded">
+        <p class="select is-fullwidth is-rounded is-success">
+          {{pform.country}}
+        </p>
+
+        <!-- Country Errors -->
+        {% if pform.country.errors %}
+          <p class="help is-danger">
+            <ul>
+              {% for error in pform.country.errors %}
+                <li>
+                  <strong style="color: red;">{{ error|escape }}</strong>
+                </li>
+              {% endfor %}
+            </ul>
+          </p>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Facebook -->
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Facebook</label>
+    </div>
+
+    <div class="field-body">
+      <div class="field is-expanded">
+        <p class="control is-expanded has-icons-left">
+          {{pform.facebook}}
+          <span class="icon is-small is-left"><i class="fab fa-facebook"></i></span>
+        </p>
+
+        <!-- Facebook Errors -->
+        {% if pform.facebook.errors %}
+          <p class="help is-danger">
+            <ul>
+              {% for error in pform.facebook.errors %}
+                <li>
+                  <strong style="color: red;">{{ error|escape }}</strong>
+                </li>
+              {% endfor %}
+            </ul>
+          </p>
+        {% endif %}
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Twitter -->
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Twitter</label>
+    </div>
+
+    <div class="field-body">
+      <div class="field is-expanded">
+        <p class="control is-expanded has-icons-left">
+          {{pform.twitter}}
+          <span class="icon is-small is-left"><i class="fab fa-twitter"></i></span>
+        </p>
+
+        <!-- Twitter Errors -->
+        {% if pform.twitter.errors %}
+          <p class="help is-danger">
+            <ul>
+              {% for error in pform.twitter.errors %}
+                <li>
+                  <strong style="color: red;">{{ error|escape }}</strong>
+                </li>
+              {% endfor %}
+            </ul>
+          </p>
+        {% endif %}
+        
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Instagram -->
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Instagram</label>
+    </div>
+
+    <div class="field-body">
+      <div class="field is-expanded">
+        <p class="control is-expanded has-icons-left">
+          {{pform.instagram}}
+          <span class="icon is-small is-left"><i class="fab fa-instagram"></i></span>
+        </p>
+
+        <!-- Instagram Errors -->
+        {% if pform.instagram.errors %}
+          <p class="help is-danger">
+            <ul>
+              {% for error in pform.instagram.errors %}
+                <li>
+                  <strong style="color: red;">{{ error|escape }}</strong>
+                </li>
+              {% endfor %}
+            </ul>
+          </p>
+        {% endif %}
+        
+      </div>
+    </div>
+  </div>
+
+
+  <!-- YouTube -->
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">YouTube</label>
+    </div>
+
+    <div class="field-body">
+      <div class="field is-expanded">
+        <p class="control is-expanded has-icons-left">
+          {{pform.youtube}}
+          <span class="icon is-small is-left"><i class="fab fa-youtube"></i></span>
+        </p>
+
+        <!-- YouTube Errors -->
+        {% if pform.youtube.errors %}
+          <p class="help is-danger">
+            <ul>
+              {% for error in pform.youtube.errors %}
+                <li>
+                  <strong style="color: red;">{{ error|escape }}</strong>
+                </li>
+              {% endfor %}
+            </ul>
+          </p>
+        {% endif %}
+        
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Submit Button -->
+  <center>
+    <div class="field">
+      <div class="control">
+        <button class="button is-rounded is-success" name="action" type="submit">
+          <b>Save</b>
+        </button>
+      </div>
+    </div>
+  </center>
+
+</form>
+
+{% endblock content %}

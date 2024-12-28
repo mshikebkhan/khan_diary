@@ -1,0 +1,55 @@
+{% autoescape off %}
+
+<!doctype html>
+{% load static %}
+<html>
+ <head>
+ 	<meta charset="utf-8">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+   	<link rel="stylesheet" href="{{ domain }}{% static 'css/email/email.css' %}">
+  	<title>Khan Diary: Welcome Email</title>
+</head>
+<body>
+
+<div class="email_top"></div>
+
+<center>
+<img src="{{ domain }}{% static 'images/logo.png' %}">
+<br>
+<br>
+
+👋 Hi <strong>{{ first_name }}</strong>,
+<br>
+
+<h1>✨ Welcome to Khan Diary</h1>
+
+<p>😍 We are so happy that you have created your account on Khan Diary.</p>
+
+<h3>📜 Please read this little guide it will help you to understand Khan Diary's basics: 👇</h3>
+
+<p>🌟 Here you can secure your moments and explore people's hearts through their texts from all around the world.</p>
+
+<p>📄 We recommend you add a diary entry just before you go to sleep.</p>
+
+<p>😎 Your account is private so only you can see your entries but if you want to share them with people <br> you can switch your account to the public by going to profile/settings/account/privacy setting.</p>
+
+<p>👉 Note: You will be automatically logged out in every 7 days (🔒 for your security).
+</p>
+
+<p>❤️ Suggest your friends and family members to use Khan Diary they will love it too.
+</p>
+
+<p>
+Thanks & Regards,
+<br>
+<strong>Khan Diary</strong>	
+</p>
+<hr>
+Khan Diary © 2022
+
+</center>
+<div class="email_bottom"></div>
+</body>
+</html>
+
+{% endautoescape %}

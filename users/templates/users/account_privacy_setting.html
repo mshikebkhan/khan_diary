@@ -1,0 +1,72 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Header -->
+<center>
+  <p class="title is-size-4 is-size-5-mobile">Account privacy setting</p>
+  <hr class="page-header-hr">
+</center>
+
+<!-- Account privacy Setting Form -->
+<div class="columns is-centered">
+  <div class="column is-wider is-half-tablet">
+    <div class="card">
+      <div class="card-content">
+        <form role="form" method="post" autocomplete="off">
+          {% csrf_token %}
+
+          {{ form.id }}
+
+          <!-- Account privacy Boolean Field -->
+          <div class="field">
+            <div class="control">
+              Public account: {{form.public}} 
+            </div>
+         
+
+          <!-- errors -->
+          {% if form.public.errors %}
+            <p class="help is-danger">
+              <ul>
+                {% for error in form.public.errors %}
+                  <li>
+                    <strong style="color: red;">{{ error|escape }}</strong>
+                  </li>
+                {% endfor %}
+              </ul>
+            </p>
+          {% endif %}
+
+           </div>
+
+       
+          {% if public %}
+            <p class="help">
+              Your account is public ! Anybody can see your profile, entries or any stuff.
+            </p>
+          {% else %}
+            <p class="help">
+              Your account is private ! Nobody can see your profile, entries or any stuff.
+            </p>
+          {% endif %}
+
+          <center>
+            <!-- Update Button -->
+            <div class="field">
+              <div class="control">
+                <button class="button is-success is-rounded" name="action" type="submit">
+                  <b>Update setting</b>
+                </button>
+              </div>
+            </div>
+          </center>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock content %}

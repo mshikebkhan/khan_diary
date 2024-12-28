@@ -1,0 +1,74 @@
+{% load static %}
+{% load paginate %}
+
+{% if users %}
+  {% paginate users %}
+  {% show_pageitems %}
+{% endif %}
+
+<br>
+<br>
+{% for user in users %}
+  <div class="card">
+    <div class="card-content">
+      <div class="level is-mobile">
+        <div class="level-item">
+          <div>
+
+            <!-- Name -->
+            <span>
+              <p class="title is-size-4 is-size-5-mobile">{{user.first_name}} {{user.last_name}}</p>
+            </span>
+
+            <!-- Username -->
+            <span>
+              <p class="subtitle is-size-5 is-size-6-mobile">
+                <a href="{% url 'users:profile' user %}">@{{user}}</a>
+                  {% if user.profile.verified %}
+                    <span class="icon is-small has-text-success"><i class="fas fa-check-circle"></i></span>
+                  {% endif %}                
+              </p>
+            </span>
+            
+          </div>
+        </div>
+        <div class="level-item">
+
+         {% if user != request.user %} 
+
+          {% if  user not in request.user.profile.following.all %}
+            <button class="button is-rounded is-light" name="follow" onclick="followUser({{user.id}},this)">
+              <b id="id_user_follow_button_text_{{user.id}}">Follow</b>
+            </button>
+          {% else %}
+            <button class="button is-rounded is-success" name="unfollow" onclick="followUser({{user.id}},this)">
+              <b id="id_user_follow_button_text_{{user.id}}">Following</b>
+            </button>
+          {% endif %}
+
+        {% else %}
+
+          <button class="button is-rounded is-light" disabled>
+            <b>Follow</b>
+          </button>
+
+        {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+{% empty %}
+  <center>
+    <img class="no-results" src="{% static 'images/no-results.png' %}" alt="no-resluts">
+    <p class="subtitle warning">No users to show.</p>
+  </center>
+  <br>
+{% endfor %}
+
+
+{% if users %}
+  {% show_pages %}
+{% endif %}

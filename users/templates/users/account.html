@@ -1,0 +1,27 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Header -->
+<div class="tabs is-centered is-boxed">
+  <ul>
+    <li><a href="{% url 'users:edit-profile' %}">Edit profile</a></li>
+    <li class="is-active"><a>Account</a></li>
+  </ul>
+</div>
+
+
+<!-- Menu  -->
+<div class="account-settings-menu">
+  <a class="button is-rounded is-outlined is-dark" href="{% url 'users:security_checkup' %}">Security checkup</a>
+  <br>
+
+  <a class="button is-rounded is-outlined is-dark" href="{% url 'users:account_privacy_setting' %}">Account privacy setting</a>
+  <br>
+
+  <a class="button is-rounded is-outlined is-dark" href="{% url 'users:change_password' %}">Change password</a>
+  <br>
+  
+</div>
+
+{% endblock content %}

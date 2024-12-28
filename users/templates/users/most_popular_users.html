@@ -1,0 +1,19 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Header -->
+<center>
+  <p class="title is-4 is-size-5-mobile">
+   <i class="fa fa-users"></i> Most popular users
+  </p>
+  <hr class="page-header-hr">
+</center>
+
+<div class="columns is-centered">
+  <div class="column is-half is-wider">
+    {% include 'users/users-list.html' %}
+  </div>
+</div>
+
+{% endblock content %}
