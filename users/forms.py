@@ -102,7 +102,7 @@ class ProfileUpdateForm(forms.ModelForm):
     """Form to update/edit profile."""
     gender = forms.ChoiceField(choices=gender_choices)
     birthday = forms.DateField(widget=forms.DateInput(
-        attrs={'class': 'input is-rounded is-success', 'placeholder': "Ex- 19/01/2003"}, format='%d/%m/%Y'), input_formats=['%d/%m/%Y'], required=True)
+        attrs={'class': 'input is-rounded is-success', 'placeholder': "Ex- 01/01/2000"}, format='%d/%m/%Y'), input_formats=['%d/%m/%Y'], required=True)
     bio = forms.CharField(widget=forms.Textarea(
         attrs={'class': 'textarea is-medium is-rounded is-success', 'rows': "7",
                'placeholder': "Add something about you", 'autocomplete': 'off'})
