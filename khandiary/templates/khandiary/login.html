@@ -1,0 +1,88 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Header -->
+<center>
+  <p class="title is-size-4 is-size-5-mobile">Log in</p>
+  <p class="subtitle is-size-5 is-size-6-mobile">Continue with your existing account.</p>
+  <hr class="page-header-hr">
+</center>
+
+<!-- Log in Form -->
+<div class="columns is-centered has-text-centered">
+  <div class="column is-wider is-half-tablet">
+    <div class="card">
+      <div class="card-content">
+        <form role="form" method="post" autocomplete="off">
+          {% csrf_token %}
+
+          <!-- Username -->
+          <div class="field">
+            <div class="control has-icons-left has-icons-right">
+              <input class="input is-rounded is-success" type="text" name="username"  placeholder="Username" maxlength="30" autofocus="" required="" id="id_username">
+              <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="field">
+            <div class="control has-icons-left has-icons-right">
+              <input class="input is-rounded is-success" type="password" name="password" placeholder="Password" autocomplete="current-password" required="" id="id_password">
+              <span class="icon is-small is-left"><i class="fas fa-key"></i></span>
+            </div>
+          </div>
+
+          {% if form.errors %}
+          <!-- login error -->
+            <div class="row" style="margin-bottom: 5px;">
+              <div class="col s12">
+                <span style="color: red; font-weight: bold;">
+                  Incorrect username or password.
+                </span>
+              </div>
+            </div>
+          {% endif %}
+
+
+
+          <!-- Submit Button -->
+          <div class="field">
+            <div class="control">
+              <button class="button is-success is-rounded" name="action" type="submit">
+                <b>Log in</b>
+              </button>
+            </div>
+          </div>
+
+          {% if request.GET.next %}
+
+            <input type="hidden" name="next" value="{{request.GET.next}}"/>
+
+            {% else %}
+
+            <input type="hidden" name="next" value="{% url 'khandiary:index' %}"/>
+          {% endif %}
+
+        </form>
+      </div>
+    </div>
+
+    <br>
+
+    <!-- Password Reset Link -->
+    <p class="subtitle is-6 ">
+      Forgot password?
+      <a href="{%  url 'password_reset' %}">Password reset</a>
+    </p>
+
+    <!-- Sign up Link -->
+    <p class="subtitle is-6 ">
+      Don't have an account?
+      <a href="{%  url 'users:signup' %}">Sign up</a>
+    </p>
+
+  </div>
+</div>
+
+{% endblock content %}

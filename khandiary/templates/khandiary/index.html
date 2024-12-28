@@ -1,0 +1,41 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Header -->
+<center>
+  <p class="title is-size-4 is-size-5-mobile">
+	{% if current_hour >= 5 and current_hour < 12 %}
+	    Good morning, {{request.user.first_name}}!
+	{% elif current_hour >= 12 and current_hour < 18 %}
+	    Good noon, {{request.user.first_name}}!
+	{% elif current_hour >= 18 and current_hour < 20 %}
+		Good evening, {{request.user.first_name}}!
+	{% else %}
+		Good night, {{request.user.first_name}}!
+	{% endif %}
+  </p>
+  <hr class="page-header-hr">
+</center>
+
+<div class="columns is-centered">
+  <div class="column is-half is-wider">
+    {% include 'entries/entries-list.html' %}
+  </div>
+</div>
+
+{% if request.user.following.count == 0 %}
+	<center>
+		<p class="subtitle">
+			Follow users to see entries in your feed.
+		</p>
+	</center>
+{% else %}
+	<center>
+		<p class="subtitle">
+			No new entries, visit explore page.
+		</p>
+	</center>
+{% endif %}
+
+{% endblock content %}

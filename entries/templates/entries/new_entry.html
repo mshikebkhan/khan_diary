@@ -1,0 +1,73 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Header -->
+<center>
+  <p class="title is-4 is-size-5-mobile">
+  New entry 
+  </p>
+  <hr class="page-header-hr">
+</center>
+
+{% if profile.banned %}
+  <center>
+    <p class="warning">
+      Your account is banned you can't add new entries.
+    </p>
+    <br>
+  </center>
+{% else %}
+  {% if can_add == False %}
+  <center>
+    <p class="warning">
+      Your can only create 1 entry in 24 hours.
+    </p>
+    <br>
+  </center>
+  {% endif %}       
+{% endif %}
+
+<!-- New Entry Form -->
+<div class="columns is-centered">
+  <div class="column is-wider is-two-thirds-desktop">
+    <div class="card">
+      <div class="card-content">
+        <form role="form" method="post" autocomplete="off">
+          {% csrf_token %}
+
+          <fieldset {% if profile.banned or  can_add == False %} disabled {% endif %}>
+          <!-- Content -->
+          <div class="field">
+            <div class="control">
+              {{form.content}}
+            </div>
+          </div>
+
+          <!-- Mood -->
+          <div class="field">
+            <div class="control is-expanded">
+              <div class="select is-fullwidth is-rounded is-success">
+                {{form.mood}}
+              </div>
+            </div>
+          </div>
+
+          <center>
+            <!-- Submit Button -->
+            <div class="field">
+              <div class="control">
+                  <button class="button is-success is-rounded" name="action" type="submit">
+                  <b>Add</b>
+                </button>
+              </div>
+            </div>
+          </fieldset>
+          </center>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

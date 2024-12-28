@@ -1,0 +1,16 @@
+<br>
+<nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
+  	<a class="pagination-previous" href="{{ first.path }}" >{{first.label}}</a>
+  	<ul class="pagination-list">
+  	{% for page in pages %}
+  		<li>
+  			{% if page.is_current%}
+  			<a class="pagination-link is-current" href="{{ page.path }}" rel="{{ querystring_key }}{% if add_nofollow %} nofollow {% endif %}">{{page.label|safe}}</a>  			
+  			{% else %}
+  			<a class="pagination-link" href="{{ page.path }}" rel="{{ querystring_key }}{% if add_nofollow %} nofollow {% endif %}">{{page.label|safe}}</a>  			
+  			{% endif %}
+  		</li>
+  	{% endfor %} 	
+  </ul>
+  	<a class="pagination-next" href="{{ last.path }}">{{last.label}}</a>
+</nav>

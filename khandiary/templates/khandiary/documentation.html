@@ -1,0 +1,132 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page header -->
+<center>
+  <p class="title is-size-4 is-size-5-mobile">Khan Diary's Offical Documentation</p>
+  <hr class="page-header-hr">
+</center>
+
+<div id="home-intro">
+  <center>
+    <!-- Tagline -->
+    <h1 id="tagline">Diary Writing, <br> Made Interesting</h1>
+
+    <!-- Subtagline -->
+    <p id="tagline-sub">
+      Secure your moments with the <br> best online diary writing platform.
+    </p>
+
+    <!-- Homepage Signup Button -->
+    <a class="button is-rounded is-success" href="{% url 'users:signup' %}">
+      <strong>Sign up</strong> &nbsp It's free
+    </a>
+
+  </center>
+</div>
+
+<div class="columns is-centered has-text-centered">
+  <!-- Some Basic Questions & Answers -->
+  <div class="column is-half">
+    <p class="title is-size-4">What is a diary entry?</p>
+    <p class="subtitle">
+      It is a summary of the whole day.
+      What special or ordinary things happened to you?
+      You write all of this stuff there in brief.
+    </p>
+
+  <br>
+
+    <p class="title is-size-4">Why should you write a diary entry?</p>
+    <p class="subtitle">
+      It can help you gain control of your emotions 
+      and improve your mental health. 
+      Even if you struggle with stress, depression, 
+      or anxiety, keeping a diary can be a great idea.
+    </p>
+  </div>
+</div>
+<br><br><br>
+
+<!-- Features -->
+<div id="home-about">
+  <div class="columns">
+
+    <!-- Keep an Online Diary -->
+    <div class="column">
+      <center>
+        <img src="{% static 'images/free.png' %}" alt="pencil-icon">
+        <p class="title is-size-5">Free</p>
+        <p>
+          Khan Diary is free.
+          No hidden charges, subscription blah blah.
+          Our revenue model is based on donations and advertisements.
+          We have made this platform available for free for everyone.
+        </p>
+      </center>
+    </div>
+
+    <!-- Available Everywhere -->
+    <div class="column">
+      <center>
+        <img src="{% static 'images/cloud.png' %}" alt="cloud-network-icon">
+        <p class="title is-size-5">Available Everywhere</p>
+        <p>
+          Nowadays life became so busy keeping a paper diary is not worth it.
+          Khan Diary is the best solution as it provides you the freedom to write from anywhere
+          all you need is just a device with internet.
+        </p>
+      </center>
+    </div>
+
+    <!-- Private -->
+    <div class="column">
+      <center>
+        <img src="{% static 'images/lock.png' %}" alt="lock-icon">
+        <p class="title is-size-5">Private</p>
+        <p>
+          By default your account is private.
+          Only you and God will know what you have written.
+          Don't worry just remember your password and chill.
+          Your emotions/moments are in safe hands.
+        </p>
+      </center>
+    </div>
+
+    <!-- Social -->
+    <div class="column">
+      <center>
+        <img src="{% static 'images/social.png' %}" alt="cloud-network-icon">
+        <p class="title is-size-5">Social</p>
+        <p>
+          See what people are writing from different parts of the giant
+          world connect to their hearts with their texts.
+          You can also become part of this by making your account public.
+        </p>
+      </center>
+    </div>
+
+  </div>
+</div>
+
+<center>
+  <p class="title is-size-5">
+    We have a lot of to-the-point features which will take your diary writing
+    experience to the next level.
+  </p>
+</center>
+
+<br>
+<br>
+
+<!-- Are You Ready? -->
+<center>
+  <p class="title">Are You Ready?</p>
+  <a class="button is-rounded is-success" href="{% url 'users:signup' %}">
+    <strong>Start Writing</strong> &nbsp It's free
+  </a>
+</center>
+
+
+{% endblock content %}

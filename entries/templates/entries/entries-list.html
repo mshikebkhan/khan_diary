@@ -1,0 +1,141 @@
+{% load static %}
+
+{% load paginate %}
+
+{% if entries %}
+  {% paginate entries %}
+  {% show_pageitems %}
+{% endif %}
+
+<br>
+<br>
+{% for entry in entries %}
+  <div class="card" id="id_entry_{{entry.id}}">
+  {% if entry.user == request.user or entry.user.profile.public %}
+    <!-- Date -->
+    <header class="card-header">
+      <p class="card-header-title">
+        <time datetime="{{entry.date_created}}">{{entry.date_created|date:'jS F Y - h:i A'}}</time>
+      </p>
+    </header>
+
+    <div class="card-content">
+
+      <!-- Mood & Views-->
+      <small>{{entry.mood|title}} mood
+        <span class="is-pulled-right"><i class="fas fa-glasses"></i> {{entry.reads}}</span>
+      </small><br><br>
+
+      <div class="content">
+
+         <!-- Content (150) -->
+         <p class="subtitle">
+          <a href="{% url 'entries:entry' entry.id %}">
+            {{entry.content|truncatechars:150}}
+          </a>
+        </p>
+
+      </div>
+
+      <!-- Diary Entry User -->
+      <a href="{% url 'users:profile' entry.user %}"><b>{{entry.user.first_name}} {{entry.user.last_name}}</b></a>
+
+    </div>
+
+    <footer class="card-footer">
+      {% if entry not in request.user.profile.saved_entries.all %}
+        <a class="card-footer-item" name="save" onclick="saveEntry({{entry.id}},this)">
+          <span class="icon is-small">
+            <i class="far fa-bookmark" id="id_entry_save_button_icon_{{entry.id}}"></i>
+          </span>
+          <span><b id="id_entry_save_button_text_{{entry.id}}">&nbsp Save</b></span>
+        </a>
+      {% else %}
+        <a class="card-footer-item" name="unsave" onclick="saveEntry({{entry.id}},this)">
+          <span class="icon is-small">
+            <i class="fas fa-bookmark" id="id_entry_save_button_icon_{{entry.id}}"></i>
+          </span>
+          <span><b id="id_entry_save_button_text_{{entry.id}}">&nbsp Saved</b></span>
+        </a>
+      {% endif %}
+
+      {% if entry.user == request.user %}
+        <a class="card-footer-item" href="{% url 'entries:edit_entry' entry.id %}" target="_blank">
+          <span class="icon is-small"><i class="fas fa-pencil-alt"></i></span>
+          <span><b>&nbsp Edit</b></span>
+        </a>
+        <a class="card-footer-item" name="{{entry.id}}" onclick="deleteEntry(this)">
+          <span class="icon is-small"><i class="fas fa-trash"></i></span>
+          <span><b>&nbsp Delete</b></span>
+        </a>
+
+      {% else %}
+
+      {% if entry not in request.user.profile.liked_entries.all %}
+        <a class="card-footer-item" name="like" onclick="likeEntry({{entry.id}},this)">
+          <span class="icon is-small">
+            <i class="far fa-heart" id="id_entry_like_button_icon_{{entry.id}}"></i>
+          </span>
+          <span><b id="id_entry_like_button_text_{{entry.id}}">&nbsp {{entry.likes}}</b></span>
+        </a>
+      {% else %}
+        <a class="card-footer-item" name="unlike" onclick="likeEntry({{entry.id}},this)">
+          <span class="icon is-small">
+            <i class="fas fa-heart" id="id_entry_like_button_icon_{{entry.id}}"></i>
+          </span>
+          <span><b id="id_entry_like_button_text_{{entry.id}}">&nbsp {{entry.likes}}</b></span>
+        </a>
+      {% endif %}
+
+        {% if not entry.reported %}
+          <a class="card-footer-item" name="{{entry.id}}" onclick="reportEntry(this)">
+            <span class="icon is-small">
+              <i class="far fa-flag" id="id_entry_report_button_icon_{{entry.id}}"></i>
+            </span>
+            <span><b id="id_entry_report_button_text_{{entry.id}}">&nbsp Report</b></span>
+          </a>
+        {% else %}
+          <a class="card-footer-item is-idle" name="{{entry.id}}" onclick="">
+            <span class="icon is-small"><i class="fas fa-flag"></i></span>
+            <span><b>&nbsp Reported</b></span>
+          </a>
+        {% endif %}
+      {% endif %}
+
+    </footer>
+  {% else %}
+    <!-- Private entry -->
+    <center><p class="subtitle warning">Private entry !</p></center>
+    <footer class="card-footer">
+        <a class="card-footer-item" name="unsave" onclick="saveEntry({{entry.id}},this)">
+          <span class="icon is-small">
+            <i class="fas fa-bookmark" id="id_entry_save_button_icon_{{entry.id}}"></i>
+          </span>
+          <span><b id="id_entry_save_button_text_{{entry.id}}">&nbsp Saved</b></span>
+        </a>
+        <a class="card-footer-item" href="{% url 'entries:edit_entry' entry.id %}" target="_blank">
+          <span class="icon is-small"><i class="fas fa-pencil-alt"></i></span>
+          <span><b>&nbsp Like</b></span>
+        </a>
+    </footer>
+
+  {% endif %}
+  </div>
+
+  <br>
+
+  <div id="empty-entry-list-div">
+
+  </div>
+
+{% empty %}
+  <center>
+    <img class="no-results" src="{% static 'images/no-results.png' %}" alt="no-resluts">
+    <p class="subtitle warning">No entries to show.</p>
+  </center>
+
+{% endfor %}
+
+{% if entries %}
+  {% show_pages %}
+{% endif %}

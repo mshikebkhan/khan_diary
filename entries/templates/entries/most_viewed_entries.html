@@ -1,0 +1,20 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Header -->
+<center>
+  <p class="title is-4 is-size-5-mobile">
+   <i class="fa fa-fire"></i> Most viewed entries
+  </p>
+  <hr class="page-header-hr">
+</center>
+
+<!-- Most Viewed Diary Entries Page -->
+<div class="columns is-centered">
+  <div class="column is-half is-wider">
+    {% include 'entries/entries-list.html' %}
+  </div>
+</div>
+
+{% endblock content %}

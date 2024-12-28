@@ -1,0 +1,35 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Header -->
+<center>
+  <p class="title is-size-4 is-size-5-mobile">Search in</p>
+  <p class="subtitle is-size-5 is-size-6-mobile">
+    <b><a href="../../search_user_or_entry/1/?query={{searched_query}}">Users</a></b> • Entries
+  </p>  
+  <hr class="page-header-hr">
+</center>
+
+<div class="columns is-centered">
+  <div class="column is-half is-wider">
+
+    <!-- Search User or Entry -->
+    <!-- Search Bar -->
+    <form method="GET" action="{% url 'khandiary:search_user_or_entry' 2 %}">
+      <div class="field">
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-rounded is-success" name="query" type="text"
+          placeholder="Search User or Entry" value="{{searched_query}}" autocomplete="off" required autofocus>
+          <span class="icon is-small is-left"><i class="fas fa-search"></i></span>
+        </div>
+      </div>
+    </form>
+
+    <br>
+    {% include 'entries/entries-list.html' %}
+
+  </div>
+</div>
+
+{% endblock content %}

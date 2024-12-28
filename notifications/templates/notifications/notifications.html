@@ -1,0 +1,105 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% load paginate %}
+{% block content %} 
+
+<!-- Page Header -->
+<center>
+  <p class="title is-size-4 is-size-5-mobile">Notifications</p>
+  <p class="subtitle is-size-5 is-size-6-mobile">{{notifications_count}}</p>
+  <hr class="page-header-hr">
+</center>
+
+
+{% if notifications_count != 0 %}
+  <!-- Clear All Notifications Button -->
+<form action="{% url 'notifications:clear_notifications' %}" method="POST" >
+  {% csrf_token %}  
+  <center>
+    <button class="button is-rounded is-success" type="submit" onclick="return confirm('Do you really want to clear your all notifications?')" ><b>Clear all</b></button>
+    </center>
+    <br>
+</form>  
+{% endif %}
+
+<div class="columns is-centered">
+  <div class="column is-half is-wider">
+    {% if notifications %}
+      {% paginate notifications %}
+      {% show_pageitems %}
+    {% endif %}
+    <br><br>
+    {% for notification in notifications %}
+
+      {% if notification.notification_type == 1 %}
+      <div class="notification">
+        <!-- From -->
+        <a href="{% url 'users:profile' notification.sender %}" style="text-decoration: none;"><strong>{{notification.sender.first_name}} {{notification.sender.last_name}}</strong>@{{notification.sender}}</a>
+        <br>
+        <!-- Subject -->
+        <span class="icon-text">
+          <span class="icon"><i class="fa fa-plus"></i></span>
+          <span>Added a new entry..</span>
+        </span>
+        <br>
+        <!-- Content -->
+        <p><small><a href="{% url 'diary:entry' notification.entry.id %}">"{{notification.preview|truncatechars:69}}"</a></small></p>
+        <!-- Time Since-->
+        <strong><small>{{notification.date_created|timesince}} ago</small></strong>
+      </div>
+      {% endif %}
+
+
+      {% if notification.notification_type == 2 %}
+      <div class="notification">
+        <!-- From -->
+        <a href="{% url 'users:profile' notification.sender %}" style="text-decoration: none;"><strong>{{notification.sender.first_name}} {{notification.sender.last_name}}</strong>@{{notification.sender}}</a>
+        <br>
+        <!-- Subject -->
+        <span class="icon-text">
+          <span class="icon"><i class="fa fa-thumbs-up"></i></span>
+          <span>Liked your entry..</span>
+        </span>
+        <br>
+        <!-- Content -->
+        <p><small><a href="{% url 'diary:entry' notification.entry.id %}">"{{notification.preview|truncatechars:69}}"</a></small></p>
+        <!-- Time Since-->
+        <strong><small>{{notification.date_created|timesince}} ago</small></strong>
+      </div>
+      {% endif %}
+
+      {% if notification.notification_type == 3 %}
+      <div class="notification">
+        <!-- From -->
+        <a href="{% url 'users:profile' notification.sender %}" style="text-decoration: none;"><strong>{{notification.sender.first_name}} {{notification.sender.last_name}}</strong>@{{notification.sender}}
+        {% if notification.sender.profile.verified %}
+          <span class="icon is-small has-text-success"><i class="fas fa-check-circle"></i></span>
+        {% endif %}
+        </a>
+        <br>
+        <!-- Subject -->
+        <span class="icon-text">
+          <span class="icon"><i class="fa fa-user-plus"></i></span>
+          <span>Followed you..</span>
+        </span>
+        <br>
+        <!-- Time Since-->
+        <strong><small>{{notification.date_created|timesince}} ago</small></strong>
+      </div>
+      {% endif %}
+
+    {% empty %}
+      <center>
+        <img class="no-results" src="{% static 'images/no-results.png' %}" alt="no-resluts">
+        <p class="subtitle warning">No notifications to show.</p>
+      </center>
+    {% endfor %}
+
+    {% if notifications %}
+      {% show_pages %}
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock content %}

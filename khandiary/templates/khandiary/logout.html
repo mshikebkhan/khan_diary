@@ -1,0 +1,27 @@
+{% extends 'khandiary/base.html' %}
+{% block content %}
+
+<center>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <p>
+    	<strong class="is-size-4">
+        You have been logged out successfully!
+    		<a style="color" href="{% url 'users:login' %}">
+          Log in again
+        </a>
+    	</strong>
+    </p>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+</center>
+
+{% endblock %}

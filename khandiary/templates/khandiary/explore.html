@@ -1,0 +1,86 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Header -->
+<center>
+  <p class="title is-size-4 is-size-5-mobile">Explore</p>
+  <p class="subtitle is-size-5 is-size-6-mobile">
+    <b>{{total_users_count}}</b> users • <b>{{total_entries_count}}</b> entries
+  </p>
+  <hr class="page-header-hr">
+</center>
+
+<div class="columns is-centered has-text-centered">
+  <div class="column is-wider is-two-thirds-desktop" >
+
+    <!-- Search Bar -->
+    <form method="GET" action="{% url 'khandiary:search_user_or_entry' 1 %}">
+      <div class="field">
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-rounded is-success" name="query" type="text"
+          placeholder="Search User or Entry" autocomplete="off" required autofocus>
+          <span class="icon is-small is-left"><i class="fas fa-search"></i></span>
+        </div>
+      </div>
+    </form>
+    <br>
+
+    <!-- Most liked & Most viewed -->
+    <p class="title is-5">Explore Khan Diary's:</p>
+      <div class="explore-khandiary-liked-viewed">
+        <a class="button is-rounded is-light" href="{% url 'entries:most_liked_entries' %}">
+          <span class="icon-text">
+            <span class="icon">
+              <i class="fa fa-thumbs-up"></i>
+            </span>
+            <span>Most liked entries</span>
+          </span>
+        </a>
+        <a class="button is-rounded is-light" href="{% url 'entries:most_viewed_entries' %}">
+          <span class="icon-text">
+            <span class="icon">
+              <i class="fa fa-fire"></i>
+            </span>
+            <span>Most viewed entries</span>
+          </span>
+        </a>
+        <a class="button is-rounded is-light" href="{% url 'users:most_popular_users' %}">
+          <span class="icon-text">
+            <span class="icon">
+              <i class="fa fa-users"></i>
+            </span>
+            <span>Most popular users</span>
+          </span>
+        </a>        
+      </div>
+      <br>
+
+
+    <!-- Explore By Moods Text -->
+    <p class="title is-5">Explore entries by moods:</p>
+
+    <div class="explore-by-moods-div">
+      <a class="button is-rounded is-outlined is-success" href="{% url 'entries:mood' 'great' %}">
+        <b>Great mood</b>
+      </a>
+      <a class="button is-rounded is-outlined is-success" href="{% url 'entries:mood' 'good' %}">
+        <b>Good mood</b>
+      </a>
+      <a class="button is-rounded is-outlined is-warning" id="usual-mood"href="{% url 'entries:mood' 'usual' %}">
+        <b>Usual mood</b>
+      </a>
+      <a class="button is-rounded is-outlined is-danger" href="{% url 'entries:mood' 'bad' %}">
+        <b>Bad mood</b>
+      </a>
+      <a class="button is-rounded is-outlined is-danger" href="{% url 'entries:mood' 'terrible' %}">
+        <b>Terrible mood</b>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+
+
+{% endblock content %}

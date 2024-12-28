@@ -1,0 +1,211 @@
+<!doctype html>
+{% load static %}
+
+<html>
+
+  <head>
+
+    <!-- HTML base Data -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Tab Icon -->
+    <link rel="icon" href="{% static 'images/favicon.png' %}">
+
+    <!-- Title -->
+    <title>
+      {% if title %} {{ title }} | {% endif %} Khan Diary: No.1 Social Diary Writing Platform
+    </title>
+
+    <!-- Description -->
+    <meta name="description" content="Khan Diary is a best online social
+    diary writing platform where you can share your life moments with the people
+    all around the world.">
+
+    <!-- Tags -->
+    <meta name="keywords" content="Khan Diary, khandiary, diary, diaries, journal, online diary, free diary, electronic diary, online journal, free journal, free online diary, free online journal, private diary, secret diary, private journal, personal journal, write, notepad, private blog, private online, social diary, diary entry, social notepad" />
+
+    <!-- Load Bulma framework CSS stylesheet. -->
+    <link rel="stylesheet" href="{% static 'css/bulma/bulma.min.css' %}">
+
+    <!-- Load website CSS stylesheet. -->
+    <link rel="stylesheet" href="{% static 'css/website/website.css' %}">
+
+    <!-- Load  Fontawesome icons sheet. -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+  </head>
+
+  <body>
+    <!-- Pre loader -->
+    <div class="pre-loader-wrapper"><span class="loader"></span></div>
+
+    <!-- Navbar -->
+    <nav class="navbar is-fixed-top has-shadow" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+
+        <!-- Website logo -->
+        <a class="navbar-item" href="{% url 'khandiary:index' %}">
+          <img id="logo" src="{% static 'images/logo.png' %}" alt="Khan Diary">
+        </a>
+
+        <!-- Navbar toggler -->
+        <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+
+      </div>
+
+      <!-- Navbar Menu -->
+      <div class="navbar-menu" id="navbarBasicExample">
+        <div class="navbar-start">
+          <a class="navbar-item" href="{% url 'entries:new_entry' %}">
+            <i class="fa fa-plus"></i>
+            &nbsp New entry
+          </a>
+
+          {% if user.is_authenticated %}
+          <a class="navbar-item" href="{% url 'entries:entries' request.user %}">
+            <i class="fa fa-list"></i>
+            &nbsp Entries
+          </a>          
+          {% else %}
+          <a class="navbar-item" href="{% url 'entries:login-to-entries' %}">
+            <i class="fa fa-list"></i>
+            &nbsp Entries
+          </a>
+          {% endif %}
+
+          <a class="navbar-item" href="{% url 'khandiary:explore' %}">
+            <i class="fa fa-search"></i>
+            &nbsp Explore
+          </a>
+          <a class="navbar-item" href="{% url 'notifications:notifications' %}">
+            <i class="fa fa-bell"></i>
+            &nbsp Notifications
+            {% if count_notifications %}
+              &nbsp
+              <span class="tag is-rounded is-danger">{{ count_notifications }}</span>
+            {% endif %}            
+              </a>
+
+          <!-- Profile Icon With Dropdown Menu -->
+          <div class="navbar-item has-dropdown is-hoverable">
+
+            <!-- Profile Icon -->
+            {% if user.is_authenticated %}
+              <a class="navbar-link" href="{% url 'users:profile' request.user %}">
+                <i class="fa fa-user"></i>
+                &nbsp {{request.user}}
+              </a>
+            {% else %}
+              <a class="navbar-link" href="{% url 'users:login-to-profile' %}">
+                <i class="fa fa-user"></i>
+                &nbsp Profile
+              </a>
+            {% endif %}
+
+            <!-- Dropdown -->
+            <div class="navbar-dropdown">             
+              <a class="navbar-item" href="{% url 'entries:saved_entries' %}">
+                <i class="fa fa-bookmark"></i>
+                &nbsp Saved entires
+              </a>
+              <a class="navbar-item" href="{% url 'entries:liked_entries' %}">
+                <i class="fa fa-thumbs-up"></i>
+                &nbsp Liked entries
+              </a>
+              <a class="navbar-item" href="{% url 'entries:read_history' %}">
+                <i class="fa fa-clock"></i>
+                &nbsp Read history
+              </a>              
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Navbar End Buttons -->
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+
+              {% if user.is_authenticated %}
+                <!-- Navbar Logout Button -->
+                <a class="button is-rounded is-light" href="{% url 'khandiary:logout' %}">Log out</a>
+              {% else %}
+                <!-- Navbar Login Button -->
+                <a class="button is-rounded is-light" href="{% url 'khandiary:login' %}">
+                  <b>Log in</b>
+                </a>
+
+                <!-- Navbar Signup button -->
+                <a class="button is-rounded is-success" href="{% url 'users:signup' %}">
+                  <b>Sign up</b>
+                </a>
+              {% endif %}
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </nav>
+
+    <!-- ##### Page section start. ##### -->
+    <section class="section">
+
+      <!-- Messages -->
+      {% if messages %}
+        {% for message in messages %}
+          <article class="message is-{{message.tags}}">
+            <div class="message-body">
+              {{message}}
+            </div>
+          </article>
+        {% endfor %}
+      {% endif %}
+
+      {% block content %}
+
+      {% endblock content %}
+    </section>
+    <!-- ##### Page section end. ##### -->
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="content has-text-centered">
+
+        <!-- Footer menu -->
+        <p>
+          <a href="{% url 'khandiary:about' %}">About</a>
+          <a href="{% url 'khandiary:contact' %}">Contact</a>
+          <a href="{% url 'khandiary:faq' %}">FAQ</a>
+          <a href="{% url 'khandiary:privacy' %}">Privacy</a>
+          <a href="{% url 'khandiary:terms' %}">Terms</a>
+        </p>
+
+        <!-- a Shikeb Khan production -->
+        <p>a Shikeb Khan production<br>
+        <!-- Footer copyright -->
+        Khan Diary © 2022 </p>
+
+      </div>
+    </footer>
+
+    <!-- Load base JS scripts -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/preLoader.js' %}"></script>
+    <script src="{% static 'js/csrf.js' %}"></script>
+    <script src="{% static 'js/collapsedMenu.js' %}"></script>
+    <script src="{% static 'js/saveEntry.js' %}"></script>
+    <script src="{% static 'js/likeEntry.js' %}"></script>
+    <script src="{% static 'js/reportEntry.js' %}"></script>
+    <script src="{% static 'js/deleteEntry.js' %}"></script>
+    <script src="{% static 'js/followUser.js' %}"></script>
+    <script src="{% static 'js/followTag.js' %}"></script>
+    <script src="{% static 'js/addRead.js' %}"></script>
+
+  </body>
+</html>

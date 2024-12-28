@@ -1,0 +1,32 @@
+{% extends 'khandiary/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Header -->
+<center>
+  <p class="title is-size-4 is-size-5-mobile">Read history</p>
+  <p class="subtitle is-size-5 is-size-6-mobile" id="id_entries_count">{{entries.count}}</p>
+  <hr class="page-header-hr">
+</center>
+
+{% if notifications_count != 0 %}
+  <!-- Clear Read History Button -->
+<form action="{% url 'entries:clear_read_history' %}" method="POST" >
+  {% csrf_token %}  
+  <center>
+    <button class="button is-rounded is-success" type="submit" onclick="return confirm('Do you really want to clear your read history?')" ><b>Clear all</b></button>
+    </center>
+    <br>
+</form>  
+{% endif %}
+
+
+<div class="columns is-centered">
+  <div class="column is-half is-wider">
+
+    {% include 'entries/entries-list.html' %}
+
+  </div>
+</div>
+
+{% endblock content %}
