@@ -1,0 +1,32 @@
+{% load static %}
+{% block content %}
+
+  <head>
+
+    <!-- HTML base Data -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Tab Icon -->
+    <link rel="icon" href="{% static 'images/favicon.png' %}">
+
+    <!-- Title -->
+    <title>
+      {% if title %} {{ title }} | {% endif %} Khan Diary: No.1 Social Diary Writing Platform
+    </title>
+
+    <!-- Description -->
+    <meta name="description" content="Khan Diary is a best online social
+    diary writing platform where you can share your life moments with the people
+    all around the world.">
+
+  </head>
+
+<center>
+	<img src="{% static 'images/construction.jpg' %}" style="max-width: 70%">
+	<h1>KHAN DIARY IS UNDER CONSTRUCTION</h1>
+    <h3>{{construction_info}}</h3>
+	<h2>Sorry For Problem, We will come soon!</h2>
+</center>
+
+{% endblock content %}
