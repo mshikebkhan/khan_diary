@@ -1,6 +1,5 @@
 Online Diary Writing and Mood Tracking Platform
 
-Description
 KhanDiary is a Django-based online platform that redefines diary writing by blending personal expression with emotional insights and community connection.
 It’s perfect for users who want to document their thoughts, share experiences, and analyze their emotional patterns.
 
