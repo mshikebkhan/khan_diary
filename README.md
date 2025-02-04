@@ -13,12 +13,11 @@ It’s perfect for users who want to document their thoughts, share experiences,
 
 <hr>
 
-<h2>Team</h2>
-<b>Concept & Backend Developer:</b> Shikeb Khan <br>
-<b>Frontend Developer & UI Designer:</b> Shikeb Khan
+Team <br>
+Concept & Backend Developer: Shikeb Khan <br>
+Frontend Developer & UI Designer: Shikeb Khan <br>
 
-<hr>
 
-<h2>Technologies</h2>
-<b>Django</b> (Backend) <br>
-<b>Bulma CSS</b> (Frontend) <br>
+Technologies <br>
+Django(Backend) <br>
+Bulma (Frontend) <br>
