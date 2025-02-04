@@ -13,12 +13,10 @@ Built exclusively for students, Ncubook ensures authenticity through verified pr
 
 <hr>
 
-<h2>Team</h2>
-<b>Concept & Backend Developer:</b> Shikeb Khan <br>
-<b>Frontend Developer & UI Designer:</b> Shikeb Khan
+Team:
+Concept & Backend Developer: Shikeb Khan <br>
+Frontend Developer & UI Designer: Shikeb Khan <br>
 
-<hr>
-
-<h2>Technologies</h2>
-<b>Django</b> (Backend) <br>
-<b>Bulma CSS</b> (Frontend)
+Technologies:
+Django (Backend) <br>
+Bulma CSS (Frontend)
