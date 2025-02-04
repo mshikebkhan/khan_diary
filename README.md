@@ -13,11 +13,11 @@ It’s perfect for users who want to document their thoughts, share experiences,
 
 <hr>
 
-Team <br>
+Team: <br>
 Concept & Backend Developer: Shikeb Khan <br>
 Frontend Developer & UI Designer: Shikeb Khan <br>
 
 
-Technologies <br>
+Technologies: <br>
 Django(Backend) <br>
 Bulma (Frontend) <br>
