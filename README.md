@@ -20,4 +20,4 @@ Frontend Developer & UI Designer: Shikeb Khan <br>
 
 Technologies: <br>
 Django(Backend) <br>
-Bulma (Frontend) <br>   Social Networking Platform for College Students <br>
+Bulma (Frontend)
