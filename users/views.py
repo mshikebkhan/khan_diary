@@ -29,7 +29,7 @@ def signup(request):
                 first_name=first_name, last_name=last_name, username=username, email=email, password=password)
 
             # Send welcome email
-            send_welcome_email(first_name, email)
+            # send_welcome_email(first_name, email)
             
             # Log the user in and then redirect to home page.
             authenticated_user = authenticate(username=new_user.username,
